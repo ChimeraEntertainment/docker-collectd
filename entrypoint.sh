@@ -2,6 +2,10 @@
 
 set -e
 
+if [ -n "$COLLECTD_HOSTNAME" ]; then
+  sed -i "/#Hostname/c\Hostname    \"${COLLECTD_HOSTNAME}\"" /etc/collectd/collectd.conf
+fi
+
 if [ -d /mnt/proc ]; then
   umount /proc
   mount -o bind /mnt/proc /proc
